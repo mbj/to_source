@@ -1,4 +1,5 @@
 * Do not emit parantheses around non keywords in binary operations (this will beautify source again)
+* Unify code for all binary emitters
 * Add YARD coverage again
 * Fix all dm2 metric tools issues
 * Mutation coverage!

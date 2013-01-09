@@ -6,11 +6,21 @@ module ToSource
 
       def dispatch
         emit('(')
-        visit(node.left)
-        emit(')')
+        emit_left
         space
         emit(self.class::SYMBOL)
         space
+        emit_right
+        emit(')')
+      end
+
+      def emit_left
+        emit('(')
+        visit(node.left)
+        emit(')')
+      end
+
+      def emit_right
         emit('(')
         visit(node.right)
         emit(')')

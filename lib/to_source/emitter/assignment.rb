@@ -49,12 +49,14 @@ module ToSource
     class AssignmentOperator < self
 
       def dispatch
+        emit('(')
         visit(node.left)
         space
         emit(self.class::SYMBOL)
         space
         emit('(')
         visit(node.right.value)
+        emit(')')
         emit(')')
       end
 
