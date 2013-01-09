@@ -34,21 +34,19 @@ module ToSource
         !!block
       end
 
-      def block
-        node.block
-      end
+      delegate(:block, :name, :receiver)
 
       def block_pass?
         block? && block.kind_of?(Rubinius::AST::BlockPass19)
       end
 
       def emit_name
-        emit(node.name)
+        emit(name)
       end
 
       def emit_receiver
         return if node.privately
-        visit(node.receiver)
+        visit(receiver)
         emit('.')
       end
 

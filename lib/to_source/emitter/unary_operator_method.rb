@@ -1,6 +1,6 @@
 module ToSource
   class Emitter
-    class UnaryOperatorMethod < self
+    class UnaryOperatorMethod < Send
 
       UNARY_MAPPING = {
         :-@ => :-,
@@ -12,7 +12,7 @@ module ToSource
       def dispatch
         name = node.name
         emit(UNARY_MAPPING.fetch(name, name))
-        visit(node.receiver)
+        visit(receiver)
       end
 
     end

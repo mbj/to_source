@@ -7,9 +7,10 @@ module ToSource
     private
 
       def dispatch
-        visit(node.value)
+        util = node
+        visit(util.value)
         emit(' =~ ')
-        visit(node.pattern)
+        visit(util.pattern)
       end
 
     end

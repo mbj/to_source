@@ -843,6 +843,14 @@ describe ToSource,'.to_source' do
     end
   end
 
+  context 'loop' do
+    assert_source <<-RUBY
+      loop do
+        foo
+      end
+    RUBY
+  end
+
   context 'while' do
     context 'single statement in body' do
       assert_source <<-RUBY

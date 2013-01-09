@@ -5,17 +5,20 @@ module ToSource
 
       handle(Rubinius::AST::SClass)
 
+    private
+
       def dispatch
-        emit(:class)
-        space
-        emit(:<<)
-        space
+        emit('class << ')
         visit(node.receiver)
+        emit_body
+        emit_end
+      end
+
+      def emit_body
         indent
         # FIXME: attr_reader missing on Rubinius::AST::SClass
         visit(node.instance_variable_get(:@body))
         unindent
-        emit_end
       end
 
     end

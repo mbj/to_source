@@ -7,15 +7,19 @@ module ToSource
     private
 
       def dispatch
-        if node.name == :[]
-          run(ElementReference, node)
+        if element_reference?
+          run(ElementReference)
           return
         end
         if binary_operator_method?
-          run(BinaryOperatorMethod, node)
+          run(BinaryOperatorMethod)
           return
         end
         normal_dispatch
+      end
+      
+      def element_reference?
+        name == :[]
       end
 
       BINARY_OPERATORS = %w(

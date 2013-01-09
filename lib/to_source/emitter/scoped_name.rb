@@ -6,10 +6,14 @@ module ToSource
       handle(Rubinius::AST::ScopedModuleName)
       handle(Rubinius::AST::ScopedConstant)
 
+    private
+
+      delegate(:parent, :name)
+
       def dispatch
-        visit(node.parent)
+        visit(parent)
         emit('::')
-        emit(node.name)
+        emit(name)
       end
 
     end

@@ -6,8 +6,9 @@ module ToSource
       private
 
         def dispatch
-          max = node.length - 1
-          node.each_with_index do |member, index|
+          body = node
+          max = body.length - 1
+          body.each_with_index do |member, index|
             visit(member)
             emit(', ') if index < max
           end

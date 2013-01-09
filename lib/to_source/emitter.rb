@@ -65,6 +65,19 @@ module ToSource
       emitter.new(node, buffer)
     end
 
+    def self.delegate(*names)
+      names.each do |name|
+        define_delegator(name)
+      end
+    end
+
+    def self.define_delegator(name)
+      define_method(name) do
+        node.public_send(name)
+      end
+      private name
+    end
+
     attr_reader :buffer
 
     def initialize(node, buffer)

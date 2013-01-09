@@ -29,9 +29,10 @@ module ToSource
       private
 
         def dispatch
-          visit(node.start)
+          util = node
+          visit(util.start)
           emit(token)
-          visit(node.finish)
+          visit(util.finish)
         end
 
         def token
@@ -54,26 +55,26 @@ module ToSource
 
         handle(Rubinius::AST::HashLiteral)
 
+      private
+
         def dispatch
-          body = node.array.each_slice(2).to_a
-
-          max = body.length - 1
-
           emit '{'
+          emit_body
+          emit '}'
+        end
 
-          body.each_with_index do |slice, index|
-            key, value = slice
-
+        def emit_body
+          body = node.array.each_slice(2).to_a
+          max  = body.length - 1
+          body.each_with_index do |(key, value), index|
             visit(key)
-            emit ' => '
+            emit(' => ')
             visit(value)
 
             if index < max 
-              emit ', ' 
+              emit(', ')
             end
           end
-
-          emit '}'
         end
 
       end

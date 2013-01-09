@@ -8,7 +8,7 @@ module ToSource
 
       def dispatch
         emit('rescue')
-        emit_condition
+        emit_conditions
         emit_splat
         emit_assignment
         emit_body
@@ -21,23 +21,23 @@ module ToSource
         unindent
       end
 
-      def emit_condition
+      def emit_conditions
         conditions = node.conditions || return
-
         body = conditions.body
 
         first = body.first
         unless body.one? and first.kind_of?(Rubinius::AST::ConstantAccess) and first.name == :StandardError
-          emit(' ')
+          space
           run(Util::DelimitedBody, body)
         end
       end
 
       def emit_splat
-        splat = node.splat || return
-        emit(',') if node.conditions
-        emit(' ')
-        visit(node.splat)
+        util = node
+        splat = util.splat || return
+        emit(',') if util.conditions
+        space
+        visit(splat)
       end
 
       def emit_assignment
@@ -47,8 +47,8 @@ module ToSource
       end
 
       def emit_next
-        condition = node.next || return
-        visit(node.next)
+        next_rescue = node.next || return
+        visit(next_rescue)
       end
 
     end

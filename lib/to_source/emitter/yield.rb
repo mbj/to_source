@@ -9,7 +9,7 @@ module ToSource
         arguments = node.arguments
         unless arguments.array.empty?
           emit('(')
-          visit(node.arguments)
+          visit(arguments)
           emit(')')
         end
       end

@@ -1,14 +1,24 @@
 module ToSource
   class Emitter
     class Unless < self
+
+    private
       
       def dispatch
         emit('unless ')
-        visit(node.condition)
+        visit(condition)
         indent
-        visit(node.else)
+        visit(else_body)
         unindent
         emit_end
+      end
+
+      def condition
+        node.condition
+      end
+
+      def else_body
+        node.else
       end
 
     end

@@ -8,9 +8,8 @@ UncommunicativeParameterName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 LargeClass:
-  max_methods: 10
-  exclude: 
-  - "Mutant::Matcher::Method" # 13 methods
+  max_methods: 11
+  exclude: []
   enabled: true
   max_instance_variables: 3
 UncommunicativeMethodName:
@@ -23,8 +22,7 @@ UncommunicativeMethodName:
   - !ruby/regexp /[A-Z]/
 LongParameterList:
   max_params: 2
-  exclude: 
-  - "Mutant::Context::Constant#initialize" # 3 params
+  exclude: []
   enabled: true
   overrides: {}
 FeatureEnvy:
@@ -38,9 +36,12 @@ BooleanParameter:
   enabled: true
 IrresponsibleModule:
   exclude: []
-  enabled: true
+  enabled: false
 UncommunicativeModuleName:
-  accept: []
+  accept: 
+  - ToSource::Emitter::Match3
+  - ToSource::Emitter::OpAssign1
+  - ToSource::Emitter::OpAssign2
   exclude: []
   enabled: true
   reject:
@@ -52,7 +53,7 @@ NestedIterators:
   enabled: true
   max_allowed_nesting: 1
 LongMethod:
-  max_statements: 6
+  max_statements: 7
   exclude: []
   enabled: true
 Duplication:

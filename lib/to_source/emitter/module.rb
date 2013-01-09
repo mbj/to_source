@@ -7,11 +7,11 @@ module ToSource
     private
 
       def dispatch
-        emit(:module)
-        space
-        visit(node.name)
+        util = node
+        emit('module ')
+        visit(util.name)
         indent
-        visit(node.body)
+        visit(util.body)
         unindent
         emit_end
       end

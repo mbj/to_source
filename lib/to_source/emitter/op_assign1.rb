@@ -7,11 +7,12 @@ module ToSource
     private
 
       def dispatch
-        visit(node.receiver)
+        util = node
+        visit(util.receiver)
         emit('[')
-        visit(node.arguments.array.first)
+        visit(util.arguments.array.first)
         emit('] ||= ')
-        visit(node.value)
+        visit(util.value)
       end
 
     end
