@@ -105,6 +105,14 @@ module ToSource
       class Method < self
         OPEN = '('.freeze
         CLOSE = ')'.freeze
+
+        class Generic < self
+          handle(Rubinius::AST::FormalArguments19)
+
+          def arguments
+            node
+          end
+        end
       end
     end
   end

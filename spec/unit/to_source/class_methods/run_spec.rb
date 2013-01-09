@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe ToSource,'.to_source' do
-  subject { described_class.to_source(node) }
-
   def compress(code)
     lines = code.split("\n")
     match = /\A( *)/.match(lines.first)
@@ -13,16 +11,32 @@ describe ToSource,'.to_source' do
     joined = stripped.join("\n")
   end
 
+  def assert_round_trip(code)
+    node = code.to_ast
+    generated = ToSource.to_source(node)
+    generated.should eql(code)
+    # This is nonsense but I had a case where it helps?
+    second_node = generated.to_ast
+    second = ToSource.to_source(second_node)
+    second.should eql(code)
+  end
+
+  def assert_entrypoints(node)
+    node.instance_variables.each do |ivar|
+      value = subject.instance_variable_get(ivar)
+      next unless value.kind_of?(Rubinius::AST::Node)
+      assert_round_trip(value)
+      assert_entrypoints(node)
+    end
+  end
+
   shared_examples_for 'a source generation method' do
     it 'should create original source' do
-      should eql(compress(expected_source))
+      assert_round_trip(compress(expected_source))
     end
 
-    it 'should be able to round trip generated source also' do
-      generated = subject
-      ast = subject.to_ast
-      second = described_class.to_source(ast)
-      generated.should eql(second)
+    it 'should be able to use all wrapped nodes as entrypoints' do
+      assert_entrypoints(expected_source.to_ast)
     end
   end
 
