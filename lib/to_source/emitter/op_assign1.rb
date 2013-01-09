@@ -13,6 +13,7 @@ module ToSource
         emit('] ||= ')
         visit(node.value)
       end
+
     end
   end
 end

@@ -1,5 +1,4 @@
 module ToSource
-
   class Emitter
     include Adamantium::Flat, Equalizer.new(:node)
 
@@ -72,5 +71,6 @@ module ToSource
       @node, @buffer = node, buffer
       dispatch
     end
+
   end
 end

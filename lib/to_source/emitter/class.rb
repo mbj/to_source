@@ -23,6 +23,7 @@ module ToSource
         emit(' < ')
         visit(superclass)
       end
+
     end
   end
 end

@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class ExecuteString < self
 
       handle(Rubinius::AST::ExecuteString)
@@ -8,7 +7,7 @@ module ToSource
       def dispatch
         emit("`#{node.string}`")
       end
-    end
 
+    end
   end
 end

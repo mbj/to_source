@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class Toplevel < self
 
       handle(Rubinius::AST::ToplevelClassName)
@@ -10,7 +9,7 @@ module ToSource
         emit('::')
         emit(node.name)
       end
-    end
 
+    end
   end
 end

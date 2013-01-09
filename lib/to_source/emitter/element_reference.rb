@@ -10,6 +10,7 @@ module ToSource
         visit(node.arguments.array.first)
         emit(']')
       end
+
     end
   end
 end

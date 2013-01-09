@@ -11,6 +11,7 @@ module ToSource
         block = node.block
         visit(block) if block
       end
+
     end
   end
 end

@@ -1,7 +1,5 @@
 module ToSource
-
   class Emitter
-
     class FormalArguments < self
 
     private
@@ -112,8 +110,11 @@ module ToSource
           def arguments
             node
           end
+
         end
+
       end
+
     end
   end
 end

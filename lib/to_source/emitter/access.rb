@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class Access < self
 
       handle(Rubinius::AST::ConstantAccess)
@@ -15,7 +14,7 @@ module ToSource
       def dispatch
         emit(node.name)
       end
-    end
 
+    end
   end
 end

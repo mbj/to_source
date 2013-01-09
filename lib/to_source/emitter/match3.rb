@@ -11,6 +11,7 @@ module ToSource
         emit(' =~ ')
         visit(node.pattern)
       end
+
     end
   end
 end

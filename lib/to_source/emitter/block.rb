@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class Block < self
       
       handle(Rubinius::AST::Block)
@@ -19,6 +18,5 @@ module ToSource
       end
 
     end
-
   end
 end

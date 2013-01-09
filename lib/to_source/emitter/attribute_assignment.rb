@@ -13,6 +13,7 @@ module ToSource
         space
         visit(node.arguments.array.first)
       end
+
     end
   end
 end

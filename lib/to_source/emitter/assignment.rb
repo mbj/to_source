@@ -1,7 +1,5 @@
 module ToSource
-
   class Emitter
-
     class Assignment < self
 
     private
@@ -46,7 +44,6 @@ module ToSource
         end
 
       end
-
     end
 
     class AssignmentOperator < self
@@ -64,7 +61,6 @@ module ToSource
       class Or < self
 
         SYMBOL = :'||='
-
         handle(Rubinius::AST::OpAssignOr19)
 
       end
@@ -72,10 +68,10 @@ module ToSource
       class And < self
 
         SYMBOL = :'&&='
-
         handle(Rubinius::AST::OpAssignAnd)
 
       end
+
     end
   end
 end

@@ -1,5 +1,4 @@
 module ToSource
-
   class Command
     include Adamantium::Flat
 
@@ -39,6 +38,7 @@ module ToSource
 
       INDENT   = Shift.new( 2)
       UNINDENT = Shift.new(-2)
+
     end
   end
 end

@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class Literal < self
 
       class EmptyArray < self

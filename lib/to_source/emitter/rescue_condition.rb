@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class RescueCondition < self
 
       handle(Rubinius::AST::RescueCondition)
@@ -53,6 +52,5 @@ module ToSource
       end
 
     end
-
   end
 end

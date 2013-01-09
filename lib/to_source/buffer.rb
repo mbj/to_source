@@ -1,5 +1,4 @@
 module ToSource
-
   class Buffer
     include Adamantium::Flat
 
@@ -36,6 +35,6 @@ module ToSource
     def new(*args)
       self.class.new(*args)
     end
-  end
 
+  end
 end

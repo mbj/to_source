@@ -10,6 +10,7 @@ module ToSource
         emit('*')
         visit(node.condition)
       end
+
     end
   end
 end

@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class Scope < self
 
       handle(Rubinius::AST::ClassScope)
@@ -12,7 +11,7 @@ module ToSource
       def dispatch
         visit(node.body)
       end
-    end
 
+    end
   end
 end

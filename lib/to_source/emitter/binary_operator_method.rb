@@ -23,6 +23,7 @@ module ToSource
       def right
         node.arguments.array.first
       end
+
     end
   end
 end

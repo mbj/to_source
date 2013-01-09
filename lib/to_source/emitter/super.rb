@@ -41,6 +41,7 @@ module ToSource
         return unless block? and !block_pass?
         visit(block)
       end
+
     end
   end
 end

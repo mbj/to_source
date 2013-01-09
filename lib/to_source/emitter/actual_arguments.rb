@@ -40,6 +40,7 @@ module ToSource
         emit(', ') if normal?
         visit(splat) 
       end
+
     end
   end
 end

@@ -12,6 +12,7 @@ module ToSource
         visit(node.ensure)
         unindent
       end
+
     end
   end
 end

@@ -9,6 +9,7 @@ module ToSource
       def dispatch
         emit("$#{node.which}")
       end
+
     end
   end
 end

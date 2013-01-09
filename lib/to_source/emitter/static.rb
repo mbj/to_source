@@ -1,6 +1,5 @@
 module ToSource
   class Emitter
-
     class Static < self
 
     private
@@ -30,6 +29,5 @@ module ToSource
       end
 
     end
-
   end
 end

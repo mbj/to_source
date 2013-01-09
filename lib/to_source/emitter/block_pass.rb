@@ -10,6 +10,7 @@ module ToSource
         emit('&')
         visit(node.body)
       end
+
     end
   end
 end

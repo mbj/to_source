@@ -14,6 +14,7 @@ module ToSource
         emit('] = ')
         visit(value)
       end
+
     end
   end
 end

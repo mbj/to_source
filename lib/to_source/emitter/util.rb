@@ -1,4 +1,3 @@
-
 module ToSource
   class Emitter
     class Util < self

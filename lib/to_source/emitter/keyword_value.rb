@@ -34,7 +34,9 @@ module ToSource
         def value?
           !node.value.kind_of?(Rubinius::AST::NilLiteral)
         end
+
       end
+
     end
 
   end
