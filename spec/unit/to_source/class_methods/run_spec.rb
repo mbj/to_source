@@ -357,6 +357,14 @@ describe ToSource,'.to_source' do
       context 'with escapes' do
         assert_source '"fo\no#{bar}b\naz"'
       end
+
+      context 'with dynamic segment in the front' do
+        assert_source '"#{bar}foo"'
+      end
+
+      context 'with dynamic segment in the end' do
+        assert_source '"foo#{bar}"'
+      end
     end
 
     context 'dynamic symbol' do
@@ -366,6 +374,14 @@ describe ToSource,'.to_source' do
 
       context 'with escapes' do
         assert_source ':"fo\no#{bar}b\naz"'
+      end
+
+      context 'with dynamic segment in the front' do
+        assert_source ':"#{bar}foo"'
+      end
+
+      context 'with dynamic segment in the end' do
+        assert_source ':"foo#{bar}"'
       end
     end
 
@@ -377,6 +393,14 @@ describe ToSource,'.to_source' do
       context 'with escapes' do
         assert_source '`fo\no#{bar}b\naz`'
       end
+
+      context 'with dynamic segment in the front' do
+        assert_source '`#{bar}foo`'
+      end
+
+      context 'with dynamic segment in the end' do
+        assert_source '`foo#{bar}`'
+      end
     end
 
     context 'dynamic regexp' do
@@ -386,6 +410,14 @@ describe ToSource,'.to_source' do
 
       context 'with escapes' do
         assert_source '/fo\no#{bar}b\naz/'
+      end
+
+      context 'with dynamic segment in the front' do
+        assert_source '/#{bar}foo/'
+      end
+
+      context 'with dynamic segment in the end' do
+        assert_source '/foo#{bar}/'
       end
     end
   end

@@ -1,8 +1,14 @@
 # v0.2.11 2013-01-9
 
+* [fixed] Emit edge cases with dynamic literals correctly
+
+[Compare v0.2.11..v0.2.12](https://github.com/mbj/to_source/compare/v0.2.11...v0.2.12)
+
+# v0.2.11 2013-01-9
+
 * [fixed] Allow all nodes to be entrypoints
 
-[Compare v0.2.10..v0.2.11](https://github.com/mbj/to_source/compare/v0.2.9...v0.2.11)
+[Compare v0.2.10..v0.2.11](https://github.com/mbj/to_source/compare/v0.2.10...v0.2.11)
 
 # v0.2.10 2013-01-7
 
