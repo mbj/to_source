@@ -10,10 +10,13 @@ module ToSource
       end
 
       class Next < self
-
         handle(Rubinius::AST::Next)
         SYMBOL = :next
+      end
 
+      class CurrentException < self
+        handle(Rubinius::AST::CurrentException)
+        SYMBOL = :'$!'
       end
 
       class Self < self

@@ -23,10 +23,10 @@ describe ToSource,'.to_source' do
 
   def assert_entrypoints(node)
     node.instance_variables.each do |ivar|
-      value = subject.instance_variable_get(ivar)
+      value = node.instance_variable_get(ivar)
       next unless value.kind_of?(Rubinius::AST::Node)
-      assert_round_trip(value)
-      assert_entrypoints(node)
+      ToSource.to_source(value)
+      assert_entrypoints(value)
     end
   end
 
