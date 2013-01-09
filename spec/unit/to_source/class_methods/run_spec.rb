@@ -439,15 +439,6 @@ describe ToSource,'.to_source' do
       assert_source 'foo.bar(:baz, :yeah)'
     end
 
-    context 'with block' do
-      assert_source <<-RUBY
-        foo.bar do
-          3
-          4
-        end
-      RUBY
-    end
-
     context 'to self' do
 
       context 'explicitly' do
@@ -473,6 +464,15 @@ describe ToSource,'.to_source' do
       end
     end
 
+    context 'with block' do
+      assert_source <<-RUBY
+        foo.bar do
+          3
+          4
+        end
+      RUBY
+    end
+
     context 'with block that takes pattern and formal arguments' do
       assert_source <<-RUBY
         foo.bar do |(a, b), c|
@@ -494,6 +494,14 @@ describe ToSource,'.to_source' do
       assert_source <<-RUBY 
         foo.bar do |a|
           3
+          4
+        end
+      RUBY
+    end
+
+    context 'with arguments and block' do
+      assert_source <<-RUBY 
+        foo.bar(baz) do
           4
         end
       RUBY

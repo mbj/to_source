@@ -24,22 +24,44 @@ module ToSource
       end
 
       def normal_dispatch
-        unless node.privately
-          visit(node.receiver)
-          emit('.')
-        end
-
-        emit(node.name)
+        emit_receiver
+        emit_name
+        emit_block_pass
         emit_block
       end
 
+      def block?
+        !!block
+      end
+
+      def block
+        node.block
+      end
+
+      def block_pass?
+        block? && block.kind_of?(Rubinius::AST::BlockPass19)
+      end
+
+      def emit_name
+        emit(node.name)
+      end
+
+      def emit_receiver
+        return if node.privately
+        visit(node.receiver)
+        emit('.')
+      end
+
       def emit_block
-        block = node.block
-        return unless block
-        pass = block.kind_of?(Rubinius::AST::BlockPass19)
-        emit('(') if pass
-        visit(node.block)
-        emit(')') if pass
+        return unless block? and !block_pass?
+        visit(block)
+      end
+
+      def emit_block_pass
+        return unless block_pass?
+        emit('(')
+        visit(block)
+        emit(')')
       end
 
     end

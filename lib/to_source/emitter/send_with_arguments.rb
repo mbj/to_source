@@ -1,6 +1,6 @@
 module ToSource
   class Emitter
-    class SendWithArguments < self
+    class SendWithArguments < Send
 
       handle(Rubinius::AST::SendWithArguments)
 
@@ -28,17 +28,11 @@ module ToSource
         BINARY_OPERATORS.include?(node.name)
       end
 
-      def emit_receiver
-        unless node.privately
-          visit(node.receiver)
-          emit('.')
-        end
-      end
-
       def normal_dispatch
         emit_receiver
-        emit(node.name)
+        emit_name
         emit_arguments
+        emit_block
       end
 
       def emit_arguments
@@ -49,12 +43,9 @@ module ToSource
       end
 
       def emit_block_pass(emitter)
-        block = node.block
-
-        if block && block.kind_of?(Rubinius::AST::BlockPass19)
-          emit(', ') if emitter.any?
-          visit(block)
-        end
+        return unless block_pass?
+        emit(', ') if emitter.any?
+        visit(block)
       end
 
     end
