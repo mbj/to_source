@@ -1,4 +1,10 @@
-# v0.2.11 2013-01-9
+# v0.2.13 2013-01-9
+
+* [fixed] Emit send with arguments and body correctly
+
+[Compare v0.2.12..v0.2.13](https://github.com/mbj/to_source/compare/v0.2.12...v0.2.13)
+
+# v0.2.12 2013-01-9
 
 * [fixed] Emit edge cases with dynamic literals correctly
 
