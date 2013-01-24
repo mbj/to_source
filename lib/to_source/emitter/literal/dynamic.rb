@@ -92,7 +92,7 @@ module ToSource
           handle(Rubinius::AST::DynamicRegex)
 
           def emit_literal(literal)
-            emit(Regexp.new(literal).source)[1..-2]
+            emit(literal)
           end
 
         end

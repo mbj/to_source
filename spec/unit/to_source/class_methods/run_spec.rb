@@ -408,6 +408,10 @@ describe ToSource,'.to_source' do
         assert_source '/foo#{bar}baz/'
       end
 
+      context 'split groups' do
+        assert_source '/(#{foo})*/'
+      end
+
       context 'with escapes' do
         assert_source '/fo\no#{bar}b\naz/'
       end
