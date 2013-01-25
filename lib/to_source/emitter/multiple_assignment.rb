@@ -75,7 +75,6 @@ module ToSource
       # @api private
       #
       def emit_right
-        return unless right?
         right = node.right
         if right.kind_of?(Rubinius::AST::ArrayLiteral)
           run(Util::DelimitedBody, right.body)

@@ -22,10 +22,10 @@ module ToSource
       def dispatch
         case
         when unary_operator_method?
-          run(UnaryOperatorMethod, node)
+          run(UnaryOperatorMethod)
           return
         when for?
-          run(For, node)
+          run(For)
           return
         end
 

@@ -33,6 +33,18 @@ module ToSource
 
     private
 
+      delegate(:block, :receiver, :privately)
+
+      # Return block arguments
+      #
+      # @return [Rubinius::AST::ActualArguments]
+      #
+      # @api private
+      #
+      def block_arguments
+        block.arguments
+      end
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -41,10 +53,10 @@ module ToSource
       #
       def dispatch
         emit('for ')
-        visit(node.block.arguments)
+        visit(block_arguments)
         emit(' in ')
         emit_receiver
-        visit(node.block)
+        visit(block)
       end
 
       # Emit receiver
@@ -54,8 +66,8 @@ module ToSource
       # @api private
       #
       def emit_receiver
-        return if node.privately
-        visit(node.receiver)
+        return if privately
+        visit(receiver)
       end
 
     end

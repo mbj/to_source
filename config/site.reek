@@ -42,6 +42,9 @@ IrresponsibleModule:
   enabled: false
 UncommunicativeModuleName:
   accept: 
+  - ToSource::Emitter::Match2
+  - ToSource::Emitter::Iter19
+  - ToSource::Emitter::For19
   - ToSource::Emitter::Match3
   - ToSource::Emitter::OpAssign1
   - ToSource::Emitter::OpAssign2

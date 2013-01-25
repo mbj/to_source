@@ -66,8 +66,9 @@ module ToSource
           # @api private
           #
           def emit_index
-            if array.empty?
-              visit(arguments.splat)
+            splat = arguments.splat
+            if splat
+              visit(splat)
             else
               visit(array[0])
             end
