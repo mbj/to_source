@@ -40,7 +40,7 @@ module ToSource
 
     # Execute command 
     #
-    # @param [Command] commant
+    # @param [Command] command
     #
     # @return [self]
     #
@@ -108,6 +108,8 @@ module ToSource
     #
     # @return [false]
     #   otherwise
+    #
+    # @api private
     #
     def blank?
       buffer.last == "\n"

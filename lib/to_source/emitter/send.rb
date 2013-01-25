@@ -76,6 +76,8 @@ module ToSource
       # @return [false]
       #   otherwise
       #
+      # @api private
+      #
       def block_pass?
         block? && block.kind_of?(Rubinius::AST::BlockPass19)
       end

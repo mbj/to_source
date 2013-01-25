@@ -63,7 +63,7 @@ module ToSource
       #
       # @return [undefined]
       #
-      # @pai private
+      # @api private
       #
       def emit_rescue(node)
         visit(node.body)

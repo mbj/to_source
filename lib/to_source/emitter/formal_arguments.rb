@@ -84,6 +84,8 @@ module ToSource
       # @return [false]
       #   otherwise
       #
+      # @api private
+      #
       def defaults?
         !!defaults
       end
@@ -129,6 +131,8 @@ module ToSource
       #
       # @return [false]
       #   otherwise
+      #
+      # @api private
       #
       def block_arg?
         !!block_arg
@@ -215,6 +219,8 @@ module ToSource
           # Return arguments
           #
           # @return [Rubnius::AST::Node]
+          #
+          # @api private
           #
           def arguments
             node

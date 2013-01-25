@@ -52,6 +52,8 @@ module ToSource
       # @return [false]
       #   otherwise
       #
+      # @api private
+      #
       def binary_operator_method?
         BINARY_OPERATORS.include?(name)
       end

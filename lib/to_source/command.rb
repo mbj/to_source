@@ -21,6 +21,13 @@ module ToSource
 
     # Command that emits token
     class Token < self
+
+      # Return token content
+      #
+      # @return [String]
+      #
+      # @api private
+      #
       attr_reader :content
 
       # Run command
@@ -28,6 +35,8 @@ module ToSource
       # @param [State] state
       #
       # @return [self]
+      #
+      # @api private
       #
       def run(state)
         state.push(self)
@@ -54,11 +63,17 @@ module ToSource
     class Shift < self
       include Equalizer.new(:width)
 
+      # Return shift width
+      #
+      # @return [Fixnum]
+      #
+      # @api private
+      #
       attr_reader :width
 
       # Run command
       #
-      # @param [State]
+      # @param [State] state
       #
       # @return [self]
       #
@@ -73,7 +88,7 @@ module ToSource
 
       # Initialize command
       #
-      # @param [Fixnum] with
+      # @param [Fixnum] width
       #
       # @return [undefined]
       #

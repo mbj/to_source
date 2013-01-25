@@ -42,6 +42,8 @@ module ToSource
       # @return [false]
       #   otherwise
       #
+      # @api private
+      #
       def splat?
         !!splat
       end
