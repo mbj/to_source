@@ -738,6 +738,14 @@ describe ToSource,'.to_source' do
     assert_source 'break(a)'
   end
 
+  context 'retry' do
+    assert_source 'retry'
+  end
+
+  context 'redo' do
+    assert_source 'redo'
+  end
+
   context 'next' do
     assert_source 'next'
   end

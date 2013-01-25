@@ -47,6 +47,14 @@ module ToSource
 
       end
 
+      # Emitter for redo node
+      class Redo < self
+
+        handle(Rubinius::AST::Redo)
+        SYMBOL = :redo
+
+      end
+
       # Emitter for retry node
       class Retry < self
 
