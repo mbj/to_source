@@ -1,3 +1,7 @@
+# v0.2.16 2013-01-25
+
+* [fixed] Support multiple assignments also for attribute and element assignments
+
 # v0.2.15 2013-01-25
 
 * [fixed] Handle Rubinius::AST::Case

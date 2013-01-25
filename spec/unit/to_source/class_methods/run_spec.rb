@@ -204,6 +204,14 @@ describe ToSource,'.to_source' do
       assert_source '@a, @b = 1, 2'
     end
 
+    context 'to attribute reference' do
+      assert_source 'a.foo, a.bar = 1, 2'
+    end
+
+    context 'to element' do
+      assert_source 'a[0], a[1] = 1, 2'
+    end
+
     context 'to class variable' do
       assert_source '@@a, @@b = 1, 2'
     end
@@ -545,11 +553,11 @@ describe ToSource,'.to_source' do
 
     context 'attribute assignment' do
       context 'on foreign object' do
-        assert_source 'foo.bar= :baz'
+        assert_source 'foo.bar = :baz'
       end
 
       context 'on self' do
-        assert_source 'self.foo= :bar'
+        assert_source 'self.foo = :bar'
       end
     end
   end

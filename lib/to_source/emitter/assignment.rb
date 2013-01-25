@@ -5,7 +5,8 @@ module ToSource
 
     private
 
-      delegate :value
+      delegate(:value)
+      predicate(:value)
 
       # Perform dispatch
       #
@@ -15,12 +16,125 @@ module ToSource
       #
       def dispatch
         emit_target
-        val = value
-
-        if val
-          emit(' = ')
-          visit(val)
+        if value?
+          emit_operator
+          visit(value)
         end
+      end
+
+      # Emit operator
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_operator
+        emit(' = ')
+      end
+
+      # Emitter for element assignments
+      class Element < self
+
+        handle(Rubinius::AST::ElementAssignment)
+
+      private
+
+        delegate(:receiver)
+
+        # Return array
+        #
+        # @return [Array]
+        #
+        # @api private
+        #
+        def array
+          node.arguments.array
+        end
+
+        # Return index
+        #
+        # @return [Rubinius::AST::Node]
+        #
+        # @api private
+        #
+        def index
+          array[0]
+        end
+
+        # Return value
+        #
+        # @return [Rubinius::AST::Node]
+        #   if value is present
+        #
+        # @return [nil]
+        #   otherwise
+        #
+        # @api private
+        #
+        def value
+          array[1]
+        end
+
+        # Perform dispatch
+        #
+        # @return [undefined]
+        #
+        # @api private
+        #
+        def emit_target
+          visit(receiver)
+          emit('[')
+          visit(index)
+          emit(']')
+        end
+
+      end
+
+      # Emitter for attribute assignments
+      class Attribute < self
+
+        handle(Rubinius::AST::AttributeAssignment)
+
+      private
+
+        delegate(:receiver)
+
+        # Return name
+        #
+        # @return [Symbol]
+        #
+        # @api private
+        #
+        def name
+          node.name.to_s.gsub(/=\z/,'').to_sym
+        end
+
+        # Emit target
+        #
+        # @return [self]
+        #
+        # @api private
+        #
+        def emit_target
+          visit(receiver)
+          emit('.')
+          emit(name)
+        end
+
+        # Return value
+        #
+        # @return [Rubinius::AST::Node]
+        #   if value is present
+        #
+        # @return [nil]
+        #   otherwise
+        #
+        # @api private
+        #
+        def value
+          node.arguments.array.first
+        end
+
       end
 
       # Emitter for constant assignments
