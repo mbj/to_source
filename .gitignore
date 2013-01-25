@@ -1,6 +1,6 @@
-*.gem
-.bundle
-Gemfile.lock
-pkg/*
-.rbx
-*.rbc
+/*.gem
+/.bundle
+/Gemfile.lock
+/pkg/*
+/.rbx
+/tmp
