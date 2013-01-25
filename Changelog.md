@@ -1,5 +1,6 @@
 # v0.2.17 2013-01-25
 
+* [fixed] Fix multiple assigments when assigning to element with splat index
 * [fixed] Add support rubinius specific type constant
 * [fixed] Add support for dynamic once literal
 * [fixed] Emit regexp options for single and dynamic literals

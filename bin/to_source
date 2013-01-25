@@ -3,14 +3,9 @@
 require 'to_source'
 
 ARGV.each do |path|
+  $stderr.puts(path)
   source = File.read(path)
   ast = source.to_ast
   next if ast.nil? # When file only has comments
-  $stderr.puts(path)
-  begin 
-    $stdout.puts(ToSource.to_source(ast))
-  rescue
-    $stderr.puts("Error in: #{path}")
-    raise
-  end
+  $stderr.puts(ToSource.to_source(ast))
 end

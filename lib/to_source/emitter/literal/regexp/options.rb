@@ -17,7 +17,7 @@ module ToSource
             # FIXME: Documented but no option flag?
             #::Regexp::FIXEDENCODING => '',
             ::Regexp::IGNORECASE    => 'i',
-            ::Regexp::MULTILINE     => 'm',
+            ::Regexp::MULTILINE     => 'm'
           )
 
           KCODES = IceNine.deep_freeze(

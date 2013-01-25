@@ -19,6 +19,24 @@ module ToSource
         visit(node.value)
       end
 
+      # Emitter for empty splat
+      class Empty < self
+
+        handle(Rubinius::AST::EmptySplat)
+
+      private
+
+        # Perform dispatch
+        #
+        # @return [undefined]
+        #
+        # @api private
+        #
+        def dispatch
+          emit('*')
+        end
+
+      end
     end
   end
 end

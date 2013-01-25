@@ -192,7 +192,13 @@ describe ToSource,'.to_source' do
 
 
   context 'element assignment' do
-    assert_source 'array[index] = value'
+    context 'simpe' do
+      assert_source 'array[index] = value'
+    end
+
+    context 'splat index' do
+      assert_source 'array[*index] = value'
+    end
   end
 
   context 'multiple assignment' do
@@ -202,6 +208,10 @@ describe ToSource,'.to_source' do
 
     context 'to local and splat var' do
       assert_source 'a, *foo = 1, 2'
+    end
+
+    context 'with empty splat' do
+      assert_source 'a, * = 1, 2'
     end
 
     context 'to splat var' do
@@ -218,6 +228,10 @@ describe ToSource,'.to_source' do
 
     context 'to element' do
       assert_source 'a[0], a[1] = 1, 2'
+    end
+
+    context 'to spat element' do
+      assert_source 'a[*foo], a[1] = 1, 2'
     end
 
     context 'to class variable' do
