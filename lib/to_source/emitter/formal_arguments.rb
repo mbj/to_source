@@ -37,7 +37,7 @@ module ToSource
       # @api private
       #
       def any?
-        required? or defaults? or splat? or block_arg?
+        required? || defaults? || splat? || block_arg?
       end
 
       delegate :arguments
