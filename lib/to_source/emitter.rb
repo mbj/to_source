@@ -101,7 +101,7 @@ module ToSource
     def self.define_predicate(name)
       predicate = :"#{name}?"
       define_method(predicate) do
-        !!node.public_send(name)
+        !!send(name)
       end
       private(predicate)
     end

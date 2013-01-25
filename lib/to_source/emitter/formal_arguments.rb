@@ -5,6 +5,9 @@ module ToSource
 
     private
 
+      delegate(:arguments)
+      predicate(:splat, :block_arg, :defaults)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -35,8 +38,6 @@ module ToSource
       def any?
         required? || defaults? || splat? || block_arg?
       end
-
-      delegate :arguments
 
       # Return required
       #
@@ -72,20 +73,6 @@ module ToSource
         arguments.defaults
       end
 
-      # Test if defaults are present
-      #
-      # @return [true]
-      #   if defaults are present
-      #
-      # @return [false]
-      #   otherwise
-      #
-      # @api private
-      #
-      def defaults?
-        !!defaults
-      end
-
       # Return splat arguments
       #
       # @return [Rubinius::AST::Node]
@@ -96,20 +83,6 @@ module ToSource
         arguments.splat
       end
 
-      # Test if splat arguments are present
-      #
-      # @return [true]
-      #   if splat arguments are present
-      #
-      # @return [false]
-      #   otherwise
-      #
-      # @api private
-      #
-      def splat?
-        !!splat
-      end
-
       # Return block argument
       #
       # @return [Rubinius::AST::Node]
@@ -118,20 +91,6 @@ module ToSource
       #
       def block_arg
         arguments.block_arg
-      end
-
-      # Test if block argument is presnet
-      #
-      # @return [true]
-      #   if block argument is present
-      #
-      # @return [false]
-      #   otherwise
-      #
-      # @api private
-      #
-      def block_arg?
-        !!block_arg
       end
 
       # Emit required
