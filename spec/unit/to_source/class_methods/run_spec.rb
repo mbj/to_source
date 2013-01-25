@@ -796,19 +796,21 @@ describe ToSource,'.to_source' do
         assert_source "((a) #{operator} (b))"
       end
     end
-
-    context 'binary operator and keywords' do
-      assert_source '((a) || (break(foo)))'
-    end
-
-    context 'sending methods to result of binary operator' do
-      assert_source '((a) || (b)).foo'
-    end
-
-    context 'nested binary operators' do
-      assert_source '((a) || (((b) || (c))))'
-    end
   end
+
+   context 'binary operator' do
+     context 'and keywords' do
+       assert_source '((a) || (break(foo)))'
+     end
+
+     context 'sending methods to result' do
+       assert_source '((a) || (b)).foo'
+     end
+
+     context 'nested' do
+       assert_source '((a) || (((b) || (c))))'
+     end
+   end
 
   { :or => :'||', :and => :'&&' }.each do |word, symbol|
     context "word form form equivalency of #{word} and #{symbol}" do
