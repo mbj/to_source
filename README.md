@@ -7,7 +7,7 @@ to_source
 
 Reverse parser to generate source code from the Rubinius AST. Also works well under MRI using the mutant-melbourne gem.
 
-Currently only support 1.9 mode!
+Currently only support for 1.9 mode!
 
 Installation
 ------------
