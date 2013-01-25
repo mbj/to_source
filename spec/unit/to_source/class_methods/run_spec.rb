@@ -816,6 +816,19 @@ describe ToSource,'.to_source' do
   context 'case statement' do
     context 'without else branch' do
       assert_source <<-RUBY
+        case 
+        when bar
+          baz
+        when baz
+          bar
+        end
+      RUBY
+    end
+  end
+
+  context 'receiver case statement' do
+    context 'without else branch' do
+      assert_source <<-RUBY
         case foo
         when bar
           baz

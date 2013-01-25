@@ -1,9 +1,10 @@
 module ToSource
   class Emitter
-    # Emitter for case statment nodes
-    class ReceiverCase < self
 
-      handle(Rubinius::AST::ReceiverCase)
+    # Emitter for case statment nodes
+    class Case < self
+
+      handle(Rubinius::AST::Case)
 
     private
 
@@ -15,10 +16,19 @@ module ToSource
       #
       def dispatch
         emit('case ')
-        visit(node.receiver)
+        emit_receiver
         emit_whens
         emit_else
         emit_end
+      end
+
+      # Emit receiver
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_receiver
       end
 
       # Emit else
@@ -49,6 +59,25 @@ module ToSource
           first = false
           visit(member)
         end
+      end
+
+      # Emitter for receiver case nodes
+      class ReceiverCase  < self
+
+        handle(Rubinius::AST::ReceiverCase)
+
+      private
+         
+        # Emit receiver
+        #
+        # @return [undefined]
+        #
+        # @api private
+        #
+        def emit_receiver
+          visit(node.receiver)
+        end
+
       end
 
     end

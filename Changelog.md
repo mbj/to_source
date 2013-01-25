@@ -1,5 +1,9 @@
 # v0.2.15 2013-01-24
 
+* [fixed] Handle Rubinius::AST::Case
+
+# v0.2.15 2013-01-24
+
 * [fixed] Emit dynamic regexp literals with split groups correctly
 
 # v0.2.14 2013-01-09

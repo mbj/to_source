@@ -11,6 +11,7 @@ ARGV.each do |path|
     $stdout.puts(ToSource.to_source(ast))
   rescue
     ast.ascii_graph
+    $stderr.puts("Error in: #{path}")
     raise
   end
 end
