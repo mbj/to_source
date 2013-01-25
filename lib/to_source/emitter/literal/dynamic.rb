@@ -149,29 +149,6 @@ module ToSource
           OPEN = CLOSE = '`'.freeze
 
         end
-
-        # Emitter for dynamic regexp literals
-        class Regex < self
-
-          handle(Rubinius::AST::DynamicRegex)
-          OPEN = CLOSE = '/'.freeze
-
-        private
-
-          # Emit literal
-          #
-          # @param [String] literal
-          #
-          # @return [undefined]
-          #
-          # @api private
-          #
-          def emit_literal(literal)
-            emit(literal)
-          end
-
-        end
-
       end
     end
   end

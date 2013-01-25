@@ -11,6 +11,7 @@ module ToSource
     private
 
       delegate(:block, :name, :receiver)
+      predicate(:block)
 
       # Perform dispatch
       #
@@ -19,12 +20,30 @@ module ToSource
       # @api private
       #
       def dispatch
-        if unary_operator_method?
+        case
+        when unary_operator_method?
           run(UnaryOperatorMethod, node)
+          return
+        when for?
+          run(For, node)
           return
         end
 
         normal_dispatch
+      end
+
+      # Test for for node
+      #
+      # @return [true]
+      #   if for node is detected
+      #
+      # @return [false]
+      #   otherwise
+      #
+      # @api private
+      #
+      def for?
+        block.kind_of?(Rubinius::AST::For19)
       end
 
       # Test for unary operator method
@@ -52,20 +71,6 @@ module ToSource
         emit_name
         emit_block_pass
         emit_block
-      end
-
-      # Test for block
-      #
-      # @return [true]
-      #   if block is present
-      #
-      # @return [false]
-      #   otherwise
-      #
-      # @api private
-      #
-      def block?
-        !!block
       end
 
       # Test for block pass

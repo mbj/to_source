@@ -1,9 +1,10 @@
 module ToSource
   class Emitter
-    # Emitter for toplevel constants or classes
+    # Emitter for toplevel constants, classes and modules
     class Toplevel < self
 
       handle(Rubinius::AST::ToplevelClassName)
+      handle(Rubinius::AST::ToplevelModuleName)
       handle(Rubinius::AST::ToplevelConstant)
 
     private

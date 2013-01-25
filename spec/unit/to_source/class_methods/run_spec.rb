@@ -48,10 +48,10 @@ describe ToSource,'.to_source' do
     it_should_behave_like 'a source generation method'
   end
 
-  def self.assert_converts(converted, source)
-    let(:node)            { source.to_ast }
-    let(:source)          { source        }
-    let(:expected_source) { converted     }
+  def self.assert_converts(target, original)
+    let(:node)            { original.to_ast }
+    let(:source)          { original        }
+    let(:expected_source) { target          }
     it_should_behave_like 'a source generation method'
   end
 
@@ -200,6 +200,14 @@ describe ToSource,'.to_source' do
       assert_source 'a, b = 1, 2'
     end
 
+    context 'to local and splat var' do
+      assert_source 'a, *foo = 1, 2'
+    end
+
+    context 'to splat var' do
+      assert_source '*foo = 1, 2'
+    end
+
     context 'to instance variable' do
       assert_source '@a, @b = 1, 2'
     end
@@ -255,6 +263,10 @@ describe ToSource,'.to_source' do
       assert_source '$1'
     end
 
+    context 'on back ref global variable' do
+      assert_source '$`'
+    end
+
     context 'on global variable' do
       assert_source '$foo'
     end
@@ -277,6 +289,10 @@ describe ToSource,'.to_source' do
   end
 
   context 'literal' do
+    context 'number' do
+      assert_source '12379813738877118345'
+    end
+
     context 'fixnum' do
       assert_source '1' 
     end
@@ -348,6 +364,42 @@ describe ToSource,'.to_source' do
         assert_source '/.*/'
       end
 
+      context 'with character classes' do
+        assert_source %q(/[^-+',.\/:@[:alnum:]\[\]\x80-\xff]+/)
+      end
+
+      context 'with options' do
+
+        context 'case insensitive' do
+          assert_source '//i'
+        end
+
+        context 'ignore comments and whitespace' do
+          assert_source '//x'
+        end
+
+        context 'assci encoding' do
+          assert_source '//n'
+        end
+
+        context 'windows-31j encoding' do
+          assert_source '//s'
+        end
+
+        context 'euc-jp encoding' do
+          assert_source '//e'
+        end
+
+        context 'utf-8 encoding' do
+          assert_source '//u'
+        end
+
+        context 'multiline' do
+          assert_source '//m'
+        end
+
+      end
+
       context 'with escapes' do
         assert_source '/\//'
       end
@@ -416,6 +468,14 @@ describe ToSource,'.to_source' do
         assert_source '/foo#{bar}baz/'
       end
 
+      context 'with flags' do
+        assert_source '/foo#{bar}/i'
+        assert_source '/foo#{bar}/m'
+        assert_source '/foo#{bar}/im'
+        assert_source '/foo#{bar}/imx'
+        assert_source '/foo#{bar}/x'
+      end
+
       context 'split groups' do
         assert_source '/(#{foo})*/'
       end
@@ -431,12 +491,40 @@ describe ToSource,'.to_source' do
       context 'with dynamic segment in the end' do
         assert_source '/foo#{bar}/'
       end
+
+      context 'with o flag' do
+        assert_source '/foo#{bar}/o'
+      end
+
+      context 'with o and other flags' do
+        assert_source '/foo#{bar}/oim'
+      end
     end
+  end
+
+  context 'END' do
+    original = <<-RUBY
+      END { 
+        foo 
+      }
+    RUBY
+
+    target = <<-RUBY
+      at_exit do
+        foo
+      end
+    RUBY
+
+    assert_converts target, original
   end
 
   context 'send' do
     context 'as element reference' do
       assert_source 'foo[index]'
+    end
+
+    context 'as element reference with splat' do
+      assert_source 'self[*foo]'
     end
 
     context 'as element reference on self' do
@@ -640,7 +728,13 @@ describe ToSource,'.to_source' do
     assert_source 'next'
   end
 
-  context 'match operator' do
+  context 'match2 operator' do
+    assert_source <<-RUBY
+      /bar/ =~ foo
+    RUBY
+  end
+
+  context 'match3 operator' do
     assert_source <<-RUBY
       foo =~ /bar/
     RUBY
@@ -871,6 +965,32 @@ describe ToSource,'.to_source' do
           baz
         else
           :foo
+        end
+      RUBY
+    end
+  end
+
+  context 'for' do
+    context 'single assignment' do
+      assert_source <<-RUBY
+        for a in bar do
+          baz
+        end
+      RUBY
+    end
+
+    context 'splat assignment' do
+      assert_source <<-RUBY
+        for a, *b in bar do
+          baz
+        end
+      RUBY
+    end
+
+    context 'multiple assignment' do
+      assert_source <<-RUBY
+        for a, b in bar do
+          baz
         end
       RUBY
     end
@@ -1119,6 +1239,10 @@ describe ToSource,'.to_source' do
     context 'without expression' do
       assert_source 'return'
     end
+  end
+
+  context 'undef' do
+    assert_source 'undef :foo'
   end
 
   context 'define' do

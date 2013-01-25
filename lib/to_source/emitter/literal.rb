@@ -171,24 +171,6 @@ module ToSource
           end
         end
 
-        # Emitter for regexp literal nodes
-        class Regexp < self
-
-          handle(Rubinius::AST::RegexLiteral)
-
-        private
-
-          # Return value to inspect
-          #
-          # @return [Regexp]
-          #
-          # @api private
-          #
-          def value
-            ::Regexp.new(node.source)
-          end
-        end
-
         # Emitter for string litera nodes
         class String < self
 
@@ -212,6 +194,7 @@ module ToSource
       class PassThrough < self
 
         handle(Rubinius::AST::FixnumLiteral)
+        handle(Rubinius::AST::NumberLiteral)
         handle(Rubinius::AST::FloatLiteral)
 
       private

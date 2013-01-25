@@ -1,14 +1,31 @@
-# v0.2.16 2013-01-25
+# v0.2.17 2013-01-25
 
+* [fixed] Add support rubinius specific type constant
+* [fixed] Add support for dynamic once literal
+* [fixed] Emit regexp options for single and dynamic literals
+* [fixed] Add support for undef keyword
+* [fixed] Add support toplevel module name
+* [fixed] Fix regexp emitter for edge cases
+* [fixed] Fix element reference with splat arguments
+* [fixed] Add support for construct
+* [fixed] Add support splat assigmnent in multiple assignment
+* [fixed] Add support for /s/ =~ foo (Rubinius::AST::Match2)
+* [fixed] Add support for $` (Rubinius::AST::BackRef)
 * [fixed] Support multiple assignments also for attribute and element assignments
 
-# v0.2.15 2013-01-25
+[Compare v0.2.16..v0.2.17](https://github.com/mbj/to_source/compare/v0.2.16...v0.2.17)
+
+# v0.2.16 2013-01-25
 
 * [fixed] Handle Rubinius::AST::Case
+
+[Compare v0.2.15..v0.2.16](https://github.com/mbj/to_source/compare/v0.2.15...v0.2.16)
 
 # v0.2.15 2013-01-24
 
 * [fixed] Emit dynamic regexp literals with split groups correctly
+
+[Compare v0.2.14..v0.2.15](https://github.com/mbj/to_source/compare/v0.2.14...v0.2.15)
 
 # v0.2.14 2013-01-09
 

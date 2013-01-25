@@ -16,7 +16,7 @@ module ToSource
       def dispatch
         visit(receiver)
         emit('[')
-        visit(node.arguments.array.first)
+        visit(node.arguments)
         emit(']')
       end
 

@@ -47,6 +47,22 @@ module ToSource
 
       end
 
+      # Emitter for retry node
+      class Retry < self
+
+        handle(Rubinius::AST::Retry)
+        SYMBOL = :retry
+
+      end
+
+      # Emitter for rubinius specific type constant
+      class TypeConstant < self
+
+        handle(Rubinius::AST::TypeConstant)
+        SYMBOL = 'Rubinius::Type'
+
+      end
+
     end
   end
 end

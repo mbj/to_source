@@ -1,7 +1,29 @@
 module ToSource
   class Emitter
-    # Emitter for iter nodes
+
     class Iter < self
+      handle(Rubinius::AST::Iter)
+
+    private
+
+
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def dispatch
+        emit(' do')
+        indented do 
+          visit(node.body)
+        end
+        emit_end
+      end
+    end
+
+    # Emitter for iter nodes
+    class Iter19 < self
 
       handle(Rubinius::AST::Iter19)
 

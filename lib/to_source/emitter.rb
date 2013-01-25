@@ -16,7 +16,11 @@ module ToSource
     # @api private
     #
     def self.build(node, buffer = [])
-      REGISTRY.fetch(node.class).new(node, buffer)
+      klass = node.class
+      emitter = REGISTRY.fetch(klass) do
+        raise RuntimeError, "No emmitter for: #{klass} at line: #{node.line}"
+      end
+      emitter.new(node, buffer)
     end
 
     # Run emitter for node
