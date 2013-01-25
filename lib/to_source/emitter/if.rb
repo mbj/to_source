@@ -1,19 +1,18 @@
 module ToSource
   class Emitter
+    # Emitter for if nodes
     class If < self
 
       handle(Rubinius::AST::If)
 
     private
 
-      def if_branch?
-        !node.body.kind_of?(Rubinius::AST::NilLiteral)
-      end
-
-      def else_branch?
-        !node.else.kind_of?(Rubinius::AST::NilLiteral)
-      end
-
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         if else_branch? and !if_branch?
           run(Unless, node)
@@ -23,6 +22,40 @@ module ToSource
         normal_dispatch
       end
 
+      # Test if if branch is present
+      #
+      # @return [true]
+      #   if if branch is present
+      #
+      # @return [false]
+      #   otherwise
+      #
+      # @api private
+      #
+      def if_branch?
+        !node.body.kind_of?(Rubinius::AST::NilLiteral)
+      end
+
+      # Test if else branch is present
+      #
+      # @return [true]
+      #   if else branch is present
+      #
+      # @return [false]
+      #   otherwise
+      #
+      # @api private
+      #
+      def else_branch?
+        !node.else.kind_of?(Rubinius::AST::NilLiteral)
+      end
+
+      # Perform normal dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def normal_dispatch
         emit('if ')
         visit(node.condition)
@@ -31,12 +64,24 @@ module ToSource
         emit('end')
       end
 
+      # Emit if brnach
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def emit_if_branch
         indent
         visit(node.body)
         unindent
       end
 
+      # Emit else branch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def emit_else_branch
         body = node.else
         return unless else_branch?

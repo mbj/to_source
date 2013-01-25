@@ -1,5 +1,7 @@
 module ToSource
   class Emitter
+
+    # Emitter for various access nodes
     class Access < self
 
       handle(Rubinius::AST::ConstantAccess)
@@ -11,6 +13,12 @@ module ToSource
 
     private
 
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      # 
       def dispatch
         emit(node.name)
       end

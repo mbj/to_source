@@ -1,23 +1,36 @@
 module ToSource
   class Emitter
+    # Emitter for class nodes
     class Class < self
 
       handle(Rubinius::AST::Class)
 
     private
 
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         emit(:class)
         space
         visit(node.name)
-        superclass
+        emit_superclass
         indent
         visit(node.body)
         unindent
         emit_end
       end
 
-      def superclass
+      # Emit superclass
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_superclass
         superclass = node.superclass
         return if superclass.kind_of?(Rubinius::AST::NilLiteral)
         emit(' < ')

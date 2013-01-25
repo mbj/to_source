@@ -1,11 +1,18 @@
 module ToSource
   class Emitter
+    # Emitter for ensure nodes
     class Ensure < self
 
       handle(Rubinius::AST::Ensure)
 
     private
 
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         emit('begin')
         indent

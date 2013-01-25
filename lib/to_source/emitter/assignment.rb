@@ -1,11 +1,20 @@
 module ToSource
   class Emitter
+    # Base class for various assignment nodes
     class Assignment < self
 
     private
 
+      delegate :value
+
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
-        emit_name
+        emit_target
         val = value
 
         if val
@@ -14,20 +23,26 @@ module ToSource
         end
       end
 
-      def value
-        node.value
-      end
-
+      # Emitter for constant assignments
       class Constant < self
 
         handle(Rubinius::AST::ConstantAssignment)
 
-        def emit_name
+      private
+
+        # Emit name
+        #
+        # @return [undefined]
+        #
+        # @api private
+        #
+        def emit_target
           visit(node.constant)
         end
 
       end
 
+      # Emitter for various variabe assignments
       class Variable < self
 
         handle(Rubinius::AST::LocalVariableAssignment)
@@ -35,19 +50,32 @@ module ToSource
         handle(Rubinius::AST::GlobalVariableAssignment)
         handle(Rubinius::AST::ClassVariableAssignment)
 
-        def emit_name
-          emit(node.name)
-        end
+      private
 
-        def name
-          node.name
+        # Emit target
+        #
+        # @return [undefined]
+        #
+        # @api private
+        #
+        def emit_target
+          emit(node.name)
         end
 
       end
     end
 
+    # Base class for assignment operators
     class AssignmentOperator < self
 
+    private
+
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         emit('(')
         visit(node.left)
@@ -60,17 +88,19 @@ module ToSource
         emit(')')
       end
 
+      # Emitter for or assigmnent operator
       class Or < self
 
-        SYMBOL = :'||='
         handle(Rubinius::AST::OpAssignOr19)
+        SYMBOL = :'||='
 
       end
 
+      # Emitter for and assigmnent operator
       class And < self
 
-        SYMBOL = :'&&='
         handle(Rubinius::AST::OpAssignAnd)
+        SYMBOL = :'&&='
 
       end
 

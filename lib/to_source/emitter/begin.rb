@@ -1,17 +1,30 @@
 module ToSource
   class Emitter
+    # Emitter for begin constructs
     class Begin < self
 
       handle(Rubinius::AST::Begin)
 
     private
 
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         emit('begin')
         emit_body
         emit_end
       end
 
+      # Emit body
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def emit_body
         indent
 
@@ -31,6 +44,12 @@ module ToSource
         unindent
       end
 
+      # Emit ensure
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def emit_ensure(node)
         visit(node.body)
         unindent
@@ -40,6 +59,12 @@ module ToSource
         unindent
       end
 
+      # Emit rescue
+      #
+      # @return [undefined]
+      #
+      # @pai private
+      #
       def emit_rescue(node)
         visit(node.body)
         unindent

@@ -1,11 +1,18 @@
 module ToSource
   class Emitter
+    # Emiter for blocks
     class Block < self
       
       handle(Rubinius::AST::Block)
 
     private
 
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         array = node.array
         max = array.length-1

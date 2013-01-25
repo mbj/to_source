@@ -1,5 +1,6 @@
 module ToSource
   class Emitter
+    # Emitter for class module or singleton class scopes
     class Scope < self
 
       handle(Rubinius::AST::ClassScope)
@@ -8,6 +9,12 @@ module ToSource
 
     private
 
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         visit(node.body)
       end

@@ -1,9 +1,16 @@
 module ToSource
   class Emitter
+    # Base class for loop node emittrs
     class Loop < self
 
     private
-
+      
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         emit(self.class::KEYWORD)
         space
@@ -14,19 +21,15 @@ module ToSource
         emit_end
       end
 
-      def condition
-        node.condition
-      end
+      delegate :condition, :body
 
-      def body
-        node.body
-      end
-
+      # Emitter for while nodes
       class While < self
         handle(Rubinius::AST::While)
         KEYWORD = :while
       end
 
+      # Emitter for until nodes
       class Until < self
         handle(Rubinius::AST::Until)
         KEYWORD = :until

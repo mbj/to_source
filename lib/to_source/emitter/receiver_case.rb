@@ -1,9 +1,18 @@
 module ToSource
   class Emitter
+    # Emitter for case statment nodes
     class ReceiverCase < self
 
       handle(Rubinius::AST::ReceiverCase)
 
+    private
+
+      # Perform dispatch
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def dispatch
         emit('case ')
         visit(node.receiver)
@@ -12,6 +21,12 @@ module ToSource
         emit_end
       end
 
+      # Emit else
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def emit_else
         body = node.else
         return if body.kind_of?(Rubinius::AST::NilLiteral)
@@ -21,6 +36,12 @@ module ToSource
         unindent
       end
 
+      # Emit whens
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
       def emit_whens
         first = true
         node.whens.each do |member|
