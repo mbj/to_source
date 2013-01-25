@@ -15,9 +15,9 @@ module ToSource
         emit(self.class::KEYWORD)
         space
         visit(condition)
-        indent
-        visit(body)
-        unindent
+        indented do
+          visit(body)
+        end
         emit_end
       end
 

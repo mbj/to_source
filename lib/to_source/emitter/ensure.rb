@@ -14,14 +14,34 @@ module ToSource
       # @api private
       #
       def dispatch
-        emit('begin')
-        indent
-        visit(node.body)
-        unindent
+        emit_begin
+        emit_enusure
+      end
+
+      # Emit begin
+      #
+      # @return [undefined]
+      #
+      # @api private
+      # 
+      def emit_begin
+        emit(:begin)
+        indented do
+          visit(node.body)
+        end
+      end
+
+      # Emit ensure
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_enusure
         emit(:ensure)
-        indent
-        visit(node.ensure)
-        unindent
+        indented do
+          visit(node.ensure)
+        end
         emit_end
       end
 

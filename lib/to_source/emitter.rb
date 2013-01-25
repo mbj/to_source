@@ -31,6 +31,20 @@ module ToSource
       build(node).source
     end
 
+    # Declare predicates
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def self.predicate(*names)
+      names.each do |name|
+        define_predicate(name)
+      end
+    end
+
+    private_class_method :predicate
+
     # Declare node delegators
     #
     # @return [undefined]
@@ -76,6 +90,24 @@ module ToSource
 
     private_class_method :define_delegator
 
+    # Define predicate
+    #
+    # @param [Symbol] name
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def self.define_predicate(name)
+      predicate = :"#{name}?"
+      define_method(predicate) do
+        !!node.public_send(name)
+      end
+      private(predicate)
+    end
+
+    private_class_method :define_delegator
+
     # Return buffer
     #
     # @return [Array<Command>]
@@ -113,11 +145,9 @@ module ToSource
     # @api private
     #
     def source
-      state = State.new
-      buffer.each do |command|
+      buffer.each_with_object(State.new) do |command, state|
         state.execute(command)
-      end
-      state.source
+      end.source
     end
 
   private
@@ -194,6 +224,30 @@ module ToSource
     #
     def emit(content)
       push(Command::Token.new(content))
+    end
+
+    # Run block indented
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def indented
+      indent
+      yield
+      unindent
+    end
+
+    # Run block in parantheses
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def parantheses
+      emit('(')
+      yield
+      emit(')')
     end
 
     # Visit descendant node

@@ -7,6 +7,8 @@ module ToSource
 
     private
 
+      delegate(:to, :from)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -15,9 +17,9 @@ module ToSource
       #
       def dispatch
         emit('alias ')
-        emit(node.to.value)
+        emit(to.value)
         space
-        emit(node.from.value)
+        emit(from.value)
       end
 
     end

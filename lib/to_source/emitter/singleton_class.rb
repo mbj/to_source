@@ -27,10 +27,10 @@ module ToSource
       # @api private
       #
       def emit_body
-        indent
-        # FIXME: attr_reader missing on Rubinius::AST::SClass
-        visit(node.instance_variable_get(:@body))
-        unindent
+        indented do
+          # FIXME: attr_reader missing on Rubinius::AST::SClass
+          visit(node.instance_variable_get(:@body))
+        end
       end
 
     end

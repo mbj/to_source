@@ -14,9 +14,9 @@ module ToSource
       def dispatch
         emit('unless ')
         visit(condition)
-        indent
-        visit(else_body)
-        unindent
+        indented do
+          visit(else_body)
+        end
         emit_end
       end
 

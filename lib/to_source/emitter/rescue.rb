@@ -16,9 +16,9 @@ module ToSource
       def dispatch
         util = node
         emit('begin')
-        indent
-        visit(util.body)
-        unindent
+        indented do
+          visit(util.body)
+        end
         visit(util.rescue)
         emit_end
       end

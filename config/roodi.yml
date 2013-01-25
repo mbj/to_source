@@ -5,8 +5,8 @@ AssignmentInConditionalCheck:    {}
 CaseMissingElseCheck:            {}
 ClassLineCountCheck:
   line_count: 324
-ClassNameCheck:                  
-  pattern: !ruby/regexp /\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/
+#ClassNameCheck:                  
+#  pattern: !ruby/regexp /\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/
 ClassVariableCheck:              {}
 CyclomaticComplexityBlockCheck:
   complexity: 2

@@ -71,9 +71,9 @@ module ToSource
       # @api private
       #
       def emit_if_branch
-        indent
-        visit(node.body)
-        unindent
+        indented do
+          visit(node.body)
+        end
       end
 
       # Emit else branch
@@ -86,9 +86,9 @@ module ToSource
         body = node.else
         return unless else_branch?
         emit('else')
-        indent
-        visit(body)
-        unindent
+        indented do
+          visit(body)
+        end
       end
 
     end

@@ -70,6 +70,8 @@ module ToSource
 
     private
 
+      delegate(:left, :right)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -77,15 +79,23 @@ module ToSource
       # @api private
       #
       def dispatch
-        emit('(')
-        visit(node.left)
-        space
-        emit(self.class::SYMBOL)
-        space
-        emit('(')
-        visit(node.right.value)
-        emit(')')
-        emit(')')
+        parantheses do
+          visit(left)
+          emit(" #{self.class::SYMBOL} ")
+          emit_right
+        end
+      end
+
+      # Emit right
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_right
+        parantheses do
+          visit(right.value)
+        end
       end
 
       # Emitter for or assigmnent operator

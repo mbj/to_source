@@ -29,9 +29,9 @@ module ToSource
       # @api private
       #
       def emit_body
-        indent
-        visit(node.body)
-        unindent
+        indented do
+          visit(node.body)
+        end
       end
 
       # Emit conditions

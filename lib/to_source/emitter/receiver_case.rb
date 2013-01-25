@@ -31,9 +31,9 @@ module ToSource
         body = node.else
         return if body.kind_of?(Rubinius::AST::NilLiteral)
         emit('else')
-        indent
-        visit(body)
-        unindent
+        indented do
+          visit(body)
+        end
       end
 
       # Emit whens

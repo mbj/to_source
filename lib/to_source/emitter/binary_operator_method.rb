@@ -12,13 +12,11 @@ module ToSource
       # @api private
       #
       def dispatch
-        emit('(')
-        emit_left
-        space
-        emit(node.name)
-        space
-        emit_right
-        emit(')')
+        parantheses do
+          emit_left
+          emit(" #{node.name} ")
+          emit_right
+        end
       end
 
       # Emit right
@@ -28,9 +26,9 @@ module ToSource
       # @api private
       #
       def emit_right
-        emit('(')
-        visit(right)
-        emit(')')
+        parantheses do
+          visit(right)
+        end
       end
 
       # Emit left
@@ -40,9 +38,9 @@ module ToSource
       # @api private
       #
       def emit_left
-        emit('(')
-        visit(node.receiver)
-        emit(')')
+        parantheses do
+          visit(node.receiver)
+        end
       end
 
       # Return right

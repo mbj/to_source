@@ -7,6 +7,8 @@ module ToSource
 
     private
 
+      delegate(:receiver, :name)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -14,9 +16,9 @@ module ToSource
       # @api private
       #
       def dispatch
-        visit(node.receiver)
+        visit(receiver)
         emit('.')
-        emit(node.name)
+        emit(name)
         space
         visit(node.arguments.array.first)
       end

@@ -16,9 +16,9 @@ module ToSource
       def dispatch
         emit(' do')
         run(FormalArguments::Block)
-        indent
-        visit(node.body)
-        unindent
+        indented do
+          visit(node.body)
+        end
         emit_end
       end
 

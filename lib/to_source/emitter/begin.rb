@@ -27,21 +27,16 @@ module ToSource
       #
       def emit_body
         indent
-
         body = node.rescue
-
-        if body.kind_of?(Rubinius::AST::Rescue)
+        case body
+        when Rubinius::AST::Rescue
           emit_rescue(body)
-          return
-        end
-
-        if body.kind_of?(Rubinius::AST::Ensure)
+        when Rubinius::AST::Ensure
           emit_ensure(body)
-          return
+        else
+          visit(body)
+          unindent
         end
-
-        visit(body)
-        unindent
       end
 
       # Emit ensure
@@ -54,9 +49,9 @@ module ToSource
         visit(node.body)
         unindent
         emit(:ensure)
-        indent
-        visit(node.ensure)
-        unindent
+        indented do
+          visit(node.ensure)
+        end
       end
 
       # Emit rescue

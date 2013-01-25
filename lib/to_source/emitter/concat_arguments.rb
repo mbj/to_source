@@ -7,6 +7,8 @@ module ToSource
 
     private
 
+      delegate(:rest)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -16,9 +18,8 @@ module ToSource
       def dispatch
         emit('[')
         run(Util::DelimitedBody, node.array.body)
-        emit(', ')
-        emit('*')
-        visit(node.rest)
+        emit(', *')
+        visit(rest)
         emit(']')
       end
 

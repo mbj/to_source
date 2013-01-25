@@ -8,6 +8,8 @@ module ToSource
 
     private
 
+      delegate(:receiver, :body)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -16,9 +18,9 @@ module ToSource
       #
       def dispatch
         emit('def ')
-        visit(node.receiver)
+        visit(receiver)
         emit('.')
-        visit(node.body)
+        visit(body)
       end
     end
 
@@ -27,6 +29,8 @@ module ToSource
 
     private
 
+      delegate(:name, :body)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -34,11 +38,11 @@ module ToSource
       # @api private
       #
       def shared_dispatch
-        emit(node.name)
+        emit(name)
         emit_arguments
-        indent
-        visit(node.body)
-        unindent
+        indented do
+          visit(body)
+        end
         emit_end
       end
 

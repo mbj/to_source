@@ -18,9 +18,9 @@ module ToSource
         emit_single
         emit_conditions
         emit_splat
-        indent
-        visit(node.body)
-        unindent
+        indented do
+          visit(node.body)
+        end
       end
 
       # Emit single

@@ -5,6 +5,8 @@ module ToSource
 
     private
 
+      delegate(:body)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -12,12 +14,12 @@ module ToSource
       # @api private
       #
       def dispatch
-        visit(node.body)
+        visit(body)
         unindent
-        emit('ensure')
-        indent
-        visit(node.ensure)
-        unindent
+        emit(:ensure)
+        indented do
+          visit(node.ensure)
+        end
       end
 
     end

@@ -90,21 +90,20 @@ module ToSource
         # @api private
         #
         def emit_segments
-          array.each_with_index do |segment, index|
-            emit_segment(segment, index)
+          array.each do |segment|
+            emit_segment(segment)
           end
         end
 
         # Emit segment
         #
         # @param [Rubinius::AST::Node] segment
-        # @param [Fixnum] index
         #
         # @return [undefined]
         #
         # @api private
         #
-        def emit_segment(segment, index)
+        def emit_segment(segment)
           case segment
           when Rubinius::AST::StringLiteral
             emit_literal_node(segment)

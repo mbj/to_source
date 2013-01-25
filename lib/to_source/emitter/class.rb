@@ -7,6 +7,8 @@ module ToSource
 
     private
 
+      delegate(:name, :body)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -16,11 +18,11 @@ module ToSource
       def dispatch
         emit(:class)
         space
-        visit(node.name)
+        visit(name)
         emit_superclass
-        indent
-        visit(node.body)
-        unindent
+        indented do
+          visit(body)
+        end
         emit_end
       end
 

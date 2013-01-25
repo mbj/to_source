@@ -17,9 +17,9 @@ module ToSource
         util = node
         emit('module ')
         visit(util.name)
-        indent
-        visit(util.body)
-        unindent
+        indented do
+          visit(util.body)
+        end
         emit_end
       end
 

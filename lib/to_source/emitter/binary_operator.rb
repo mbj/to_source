@@ -12,13 +12,11 @@ module ToSource
       # @api private
       #
       def dispatch
-        emit('(')
-        emit_left
-        space
-        emit(self.class::SYMBOL)
-        space
-        emit_right
-        emit(')')
+        parantheses do
+          emit_left
+          emit(" #{self.class::SYMBOL} ")
+          emit_right
+        end
       end
 
       # Emit left
@@ -28,9 +26,9 @@ module ToSource
       # @api private
       #
       def emit_left
-        emit('(')
-        visit(node.left)
-        emit(')')
+        parantheses do 
+          visit(node.left)
+        end
       end
 
       # Emit right
@@ -40,9 +38,9 @@ module ToSource
       # @api private
       #
       def emit_right
-        emit('(')
-        visit(node.right)
-        emit(')')
+        parantheses do
+          visit(node.right)
+        end
       end
 
       # Emitter for binary or operator

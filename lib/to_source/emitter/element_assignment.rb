@@ -7,6 +7,8 @@ module ToSource
 
     private
 
+      delegate(:receiver)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -15,7 +17,7 @@ module ToSource
       #
       def dispatch
         index, value = node.arguments.array
-        visit(node.receiver)
+        visit(receiver)
         emit('[')
         visit(index)
         emit('] = ')
