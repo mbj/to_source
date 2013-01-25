@@ -13,16 +13,12 @@ module ToSource
       #
       def dispatch
         return unless any?
-
         util = self.class
-
         emit(util::OPEN)
-
         emit_required
         emit_defaults
         emit_splat
         emit_block_arg
-
         emit(util::CLOSE)
       end
 
@@ -148,12 +144,24 @@ module ToSource
         array = required
         max = array.length - 1
         array.each_with_index do |member, index|
-          if member.kind_of?(Rubinius::AST::Node)
-            visit(member)
-          else
-            emit(member)
-          end
+          emit_member(member)
           emit(', ') if index < max
+        end
+      end
+
+      # Emit member
+      #
+      # @param [Object, Rubinius::AST::Node] member
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_member(member)
+        if member.kind_of?(Rubinius::AST::Node)
+          visit(member)
+        else
+          emit(member)
         end
       end
 
@@ -180,7 +188,18 @@ module ToSource
 
         emit(', ') if required? or defaults?
         emit('*')
-        value = splat
+        emit_splat_value(splat)
+      end
+
+      # Emit splat value
+      #
+      # @param [Object] value
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_splat_value(value)
         unless value == :@unnamed_splat
           emit(value)
         end
