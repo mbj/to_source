@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.authors            = ['Markus Schirp']
   s.email              = ['mbj@seonic.net']
   s.homepage           = 'http://github.com/mbj/to_source'
-  s.summary            = %q{Transform Rubinius 1.9 AST back to equvalent source code.}
+  s.summary            = %q{Transform Rubinius 1.9 AST back to equivalent source code}
   s.description        = s.summary
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- {spec,features}/*`.split("\n")
