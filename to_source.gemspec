@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name               = 'to_source'
-  s.version            = '0.2.16'
+  s.version            = '0.2.17'
   s.authors            = ['Markus Schirp']
   s.email              = ['mbj@seonic.net']
   s.homepage           = 'http://github.com/mbj/to_source'
