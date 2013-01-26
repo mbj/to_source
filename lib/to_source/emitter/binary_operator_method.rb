@@ -43,10 +43,11 @@ module ToSource
       # @api private
       #
       def emit_operator
+        name = node.name
         if splat?
-          emit(".#{node.name}")
+          emit(".#{name}")
         else
-          emit(" #{node.name} ")
+          emit(" #{name} ")
         end
       end
 

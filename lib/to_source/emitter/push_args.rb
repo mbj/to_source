@@ -5,6 +5,8 @@ module ToSource
 
     private
 
+      delegate(:arguments, :value)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -12,9 +14,9 @@ module ToSource
       # @api private
       #
       def dispatch
-        visit(node.arguments)
+        visit(arguments)
         emit(', ')
-        visit(node.value)
+        visit(value)
       end
 
       class Array < self

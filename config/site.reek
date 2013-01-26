@@ -44,6 +44,8 @@ UncommunicativeModuleName:
   accept: 
   - ToSource::Emitter::Match2
   - ToSource::Emitter::Iter19
+  - ToSource::Emitter::Flip::Flip2
+  - ToSource::Emitter::Flip::Flip3
   - ToSource::Emitter::For19
   - ToSource::Emitter::Match3
   - ToSource::Emitter::OpAssign1
