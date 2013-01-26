@@ -359,6 +359,10 @@ describe ToSource,'.to_source' do
       context 'with splat in the beginning' do
         assert_source '[*foo, 1]'
       end
+
+      context 'with splat in the beginning and end' do
+        assert_source '[*foo, *baz]'
+      end
     end
 
     context 'empty hash' do
