@@ -7,6 +7,8 @@ module ToSource
 
     private
 
+      delegate(:receiver, :arguments, :value)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -14,12 +16,27 @@ module ToSource
       # @api private
       #
       def dispatch
-        util = node
-        visit(util.receiver)
+        visit(receiver)
         emit('[')
-        visit(util.arguments.array.first)
-        emit('] ||= ')
-        visit(util.value)
+        visit(arguments.array.first)
+        emit("] #{operator} ")
+        visit(value)
+      end
+
+      MAPPING = {
+        :or =>  :'||',
+        :and => :'&&'
+      }.freeze
+
+      # Return operator
+      #
+      # @return [String]
+      #
+      # @api private
+      #
+      def operator
+        op = node.op
+        "#{MAPPING.fetch(op, op)}="
       end
 
     end

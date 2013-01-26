@@ -199,6 +199,14 @@ describe ToSource,'.to_source' do
     context 'splat index' do
       assert_source 'array[*index] = value'
     end
+
+    context 'with assignment operator' do
+      %w(+ - * / % & | || &&).each do |operator|
+        context "with #{operator}" do
+          assert_source "array[index] #{operator}= 2"
+        end
+      end
+    end
   end
 
   context 'multiple assignment' do

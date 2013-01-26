@@ -1,5 +1,6 @@
 # v0.2.17 2013-01-25
 
+* [fixed] Fix op assign 1 operators array[foo] ||= etc
 * [fixed] Add support regexp in if statements with implicit haystack (Rubinius::AST::Match)
 * [fixed] Add support for Rubionius::AST::Flip{2,3} (flip flops)
 * [fixed] Add support for Rubionius::AST::VAlias
