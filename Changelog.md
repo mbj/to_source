@@ -1,5 +1,6 @@
 # v0.2.17 2013-01-25
 
+* [fixed] Add support for Rubionius::AST::VAlias
 * [fixed] Fix multiple edge cases with array literals and splats
 * [fixed] Add support for mixed splat arguments 
 * [fixed] Add support for __ENCODING__

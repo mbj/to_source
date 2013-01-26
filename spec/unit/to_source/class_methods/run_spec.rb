@@ -778,6 +778,12 @@ describe ToSource,'.to_source' do
     RUBY
   end
 
+  context 'valias' do
+    assert_source <<-RUBY
+      alias $foo $bar
+    RUBY
+  end
+
   context 'alias' do
     assert_source <<-RUBY
       alias foo bar
