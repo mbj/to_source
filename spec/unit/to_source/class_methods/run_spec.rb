@@ -352,8 +352,12 @@ describe ToSource,'.to_source' do
         assert_source '[1, 2, 3]'
       end
 
-      context 'with splat' do
+      context 'with splat in the end' do
         assert_source '[1, *foo]'
+      end
+
+      context 'with splat in the beginning' do
+        assert_source '[*foo, 1]'
       end
     end
 

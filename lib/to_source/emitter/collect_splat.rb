@@ -1,25 +1,6 @@
 module ToSource
   class Emitter
 
-    class PushArgs < self
-
-      handle(Rubinius::AST::PushArgs)
-
-    private
-
-      # Perform dispatch
-      #
-      # @return [undefined]
-      #
-      # @api private
-      #
-      def dispatch
-        visit(node.arguments)
-        emit(', ')
-        visit(node.value)
-      end
-    end
-
     # Emitter for collect splat nodes
     class CollectSplat < self
 
@@ -57,8 +38,12 @@ module ToSource
       # @api private
       #
       def emit_splat
-        # FIXME: Add attr reader
-        visit(node.instance_variable_get(:@splat))
+        splat = node.instance_variable_get(:@splat)
+        if splat.kind_of?(Rubinius::AST::PushArgs)
+          run(PushArgs, splat)
+        else
+          visit(splat)
+        end
       end
     end
   end

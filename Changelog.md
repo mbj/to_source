@@ -1,5 +1,6 @@
 # v0.2.17 2013-01-25
 
+* [fixed] Fix Array literal with first splat element
 * [fixed] Add support for mixed splat arguments 
 * [fixed] Add support for __ENCODING__
 * [fixed] Fix emit of splat arguments to binary method operators
