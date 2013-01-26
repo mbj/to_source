@@ -203,7 +203,13 @@ describe ToSource,'.to_source' do
     context 'with assignment operator' do
       %w(+ - * / % & | || &&).each do |operator|
         context "with #{operator}" do
-          assert_source "array[index] #{operator}= 2"
+          context 'explicit index' do
+            assert_source "array[index] #{operator}= 2"
+          end
+
+          context 'implicit index' do
+            assert_source "array[] #{operator}= 2"
+          end
         end
       end
     end

@@ -7,7 +7,7 @@ module ToSource
 
     private
 
-      delegate(:receiver, :arguments, :value)
+      delegate(:receiver, :value)
 
       # Perform dispatch
       #
@@ -18,9 +18,24 @@ module ToSource
       def dispatch
         visit(receiver)
         emit('[')
-        visit(arguments.array.first)
+        emit_index
         emit("] #{operator} ")
         visit(value)
+      end
+
+      # Emit index
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_index
+        arguments = node.arguments
+        array = arguments.array
+        if array.any?
+          visit(array.first)
+          return
+        end
       end
 
       MAPPING = {
