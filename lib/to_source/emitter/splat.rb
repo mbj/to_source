@@ -8,6 +8,8 @@ module ToSource
 
     private
 
+      delegate(:value)
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -16,7 +18,17 @@ module ToSource
       #
       def dispatch
         emit('*')
-        visit(node.value)
+        emit_value
+      end
+
+      # Emit value
+      #
+      # @return [undefined]
+      #
+      # @api private
+      #
+      def emit_value
+        visit(value)
       end
 
       # Emitter for empty splat
@@ -34,6 +46,15 @@ module ToSource
         #
         def dispatch
           emit('*')
+        end
+
+        # Return value
+        #
+        # @return [nil]
+        #
+        # @api private
+        #
+        def value
         end
 
       end

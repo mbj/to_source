@@ -625,6 +625,14 @@ describe ToSource,'.to_source' do
       assert_source 'foo.bar(*args)'
     end
 
+    context 'with formal splat and formal argument' do
+      assert_source 'foo.bar(*arga, foo, *argb)'
+    end
+
+    context 'with splat and formal argument' do
+      assert_source 'foo.bar(*args, foo)'
+    end
+
     context 'with formal and splat argument' do
       assert_source 'foo.bar(foo, *args)'
     end
