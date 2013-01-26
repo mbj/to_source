@@ -921,6 +921,13 @@ describe ToSource,'.to_source' do
   end
 
   context 'if statement' do
+    context 'when matching regexp' do
+      assert_source <<-RUBY
+        if /foo/
+          bar
+        end
+      RUBY
+    end
     context 'without else branch' do
       context 'single statement in branch' do
         assert_source <<-RUBY
