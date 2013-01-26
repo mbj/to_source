@@ -1,4 +1,4 @@
-# v0.2.17 2013-01-25
+# v0.2.17 2013-01-26
 
 * [fixed] Fix op assign 1 operators with implicit index array[] ||= etc
 * [fixed] Fix op assign 1 operators with explicit index array[foo] ||= etc
