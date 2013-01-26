@@ -39,6 +39,14 @@ module ToSource
 
       end
 
+      # Emitter for encoding node
+      class Encoding < self
+
+        handle(Rubinius::AST::Encoding)
+        SYMBOL = :__ENCODING__
+
+      end
+
       # Emitter for file node
       class File < self
 

@@ -1,5 +1,6 @@
 # v0.2.17 2013-01-25
 
+* [fixed] Add support for __ENCODING__
 * [fixed] Fix emit of splat arguments to binary method operators
 * [fixed] Fix multiple assigments when assigning to element with splat index
 * [fixed] Add support for retry

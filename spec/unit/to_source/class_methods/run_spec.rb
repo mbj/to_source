@@ -1245,6 +1245,10 @@ describe ToSource,'.to_source' do
     end
   end
 
+  context '__ENCODING__' do
+    assert_source '__ENCODING__'
+  end
+
   context '__FILE__' do
     assert_source '__FILE__'
   end
