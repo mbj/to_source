@@ -778,6 +778,24 @@ describe ToSource,'.to_source' do
     RUBY
   end
 
+  context 'flip flops' do
+    context 'flip2' do
+      assert_source <<-RUBY
+        if (((i) == (4)))..(((i) == (4)))
+          foo
+        end
+      RUBY
+    end
+
+    context 'flip3' do
+      assert_source <<-RUBY
+        if (((i) == (4)))...(((i) == (4)))
+          foo
+        end
+      RUBY
+    end
+  end
+
   context 'valias' do
     assert_source <<-RUBY
       alias $foo $bar
