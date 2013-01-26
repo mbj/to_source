@@ -5,6 +5,23 @@ module ToSource
 
     private
 
+      delegate(:arguments)
+      predicate(:splat)
+
+      # Return splat
+      #
+      # @return [Rubinius::AST::Node]
+      #   if splat is present
+      #
+      # @return [nil]
+      #   otherwise
+      #
+      # @api private
+      #
+      def splat
+        arguments.splat
+      end
+
       # Perform dispatch
       #
       # @return [undefined]
@@ -14,8 +31,22 @@ module ToSource
       def dispatch
         parantheses do
           emit_left
-          emit(" #{node.name} ")
+          emit_operator
           emit_right
+        end
+      end
+
+      # Emit operator
+      #
+      # @return [self]
+      #
+      # @api private
+      #
+      def emit_operator
+        if splat?
+          emit(".#{node.name}")
+        else
+          emit(" #{node.name} ")
         end
       end
 
@@ -50,7 +81,11 @@ module ToSource
       # @api private
       #
       def right
-        node.arguments.array.first
+        if splat?
+          splat
+        else
+          arguments.array.first
+        end
       end
 
     end

@@ -783,9 +783,13 @@ describe ToSource,'.to_source' do
   end
 
   context 'binary operators methods' do
-    %w(+ - * / & | && || << >> == === != <= < <=> > >= =~ !~ ^ **).each do |operator|
+    %w(+ - * / & | << >> == === != <= < <=> > >= =~ !~ ^ **).each do |operator|
       context "on literals #{operator}" do
         assert_source "((1) #{operator} (2))"
+      end
+
+      context "#{operator} with splat args" do
+        assert_source "((left).#{operator}(*foo))"
       end
 
       context "on self #{operator}" do
