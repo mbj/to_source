@@ -6,8 +6,14 @@ to_source
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mbj/to_source)
 
 Reverse parser to generate source code from the Rubinius AST. Also works well under MRI using the mutant-melbourne gem.
-
 Currently only support for 1.9 mode!
+
+To source is the backend of [mutant](https://github.com/mbj/mutant) it is used to create the (mutated) source that is 
+evaled into the vm. Also for creating the diffs.
+
+It should be able to create equivalent, but not identical, source. The current focus is to create *correct* but not 
+*beautiful* source. Once correctnes is at 100% I'll focus on beautifullnes, so pls do not complain about excess of 
+parantheses now ;).
 
 Installation
 ------------
