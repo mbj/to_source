@@ -1,3 +1,9 @@
+# v0.2.18 2013-01-29
+
+* [fixed] Emit ranges in parantheses to resolve ambiguity
+
+[Compare v0.2.17..v0.2.18](https://github.com/mbj/to_source/compare/v0.2.17...v0.2.18)
+
 # v0.2.17 2013-01-26
 
 * [fixed] Fix op assign 1 operators with implicit index array[] ||= etc
