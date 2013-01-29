@@ -387,12 +387,18 @@ describe ToSource,'.to_source' do
       assert_source '{:answer => 42, :bar => :baz}'
     end
 
-    context 'inclusive range' do
-      assert_source '20..34'
-    end
+    context 'range' do
+      context 'inclusive' do
+        assert_source '(20..34)'
+      end
 
-    context 'exclusive range' do
-      assert_source '20...34'
+      context 'expression in bounds' do
+        assert_source '(foo..bar)'
+      end
+
+      context 'exclusive range' do
+        assert_source '(20...34)'
+      end
     end
 
     context 'regexp' do
