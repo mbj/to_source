@@ -14,7 +14,7 @@ module ToSource
         #
         def dispatch
           util = node
-          parantheses do
+          parentheses do
             visit(util.start)
             emit(self.class::TOKEN)
             visit(util.finish)

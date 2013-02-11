@@ -242,13 +242,13 @@ module ToSource
       unindent
     end
 
-    # Run block in parantheses
+    # Run block in parentheses
     #
     # @return [undefined]
     #
     # @api private
     #
-    def parantheses
+    def parentheses
       emit('(')
       yield
       emit(')')

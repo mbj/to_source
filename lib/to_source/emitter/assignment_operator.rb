@@ -15,7 +15,7 @@ module ToSource
       # @api private
       #
       def dispatch
-        parantheses do
+        parentheses do
           visit(left)
           emit(" #{self.class::SYMBOL} ")
           emit_right
@@ -29,7 +29,7 @@ module ToSource
       # @api private
       #
       def emit_right
-        parantheses do
+        parentheses do
           visit(right.value)
         end
       end

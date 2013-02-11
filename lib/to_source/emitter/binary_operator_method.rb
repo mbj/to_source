@@ -29,7 +29,7 @@ module ToSource
       # @api private
       #
       def dispatch
-        parantheses do
+        parentheses do
           emit_left
           emit_operator
           emit_right
@@ -58,7 +58,7 @@ module ToSource
       # @api private
       #
       def emit_right
-        parantheses do
+        parentheses do
           visit(right)
         end
       end
@@ -70,7 +70,7 @@ module ToSource
       # @api private
       #
       def emit_left
-        parantheses do
+        parentheses do
           visit(node.receiver)
         end
       end

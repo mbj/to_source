@@ -23,7 +23,7 @@ module ToSource
       # @api private
       #
       def emit_start
-        parantheses do
+        parentheses do
           # FIXME: Add reader
           visit(node.instance_variable_get(:@start))
         end
@@ -36,7 +36,7 @@ module ToSource
       # @api private
       #
       def emit_finish
-        parantheses do
+        parentheses do
           # FIXME: Add reader
           visit(node.instance_variable_get(:@finish))
         end
