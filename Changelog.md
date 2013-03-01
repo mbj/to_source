@@ -1,3 +1,9 @@
+# v0.2.19 2013-03-1
+
+* [change] Bump dependencies
+
+[Compare v0.2.18..v0.2.19](https://github.com/mbj/to_source/compare/v0.2.18...v0.2.19)
+
 # v0.2.18 2013-01-29
 
 * [fixed] Emit ranges in parantheses to resolve ambiguity
