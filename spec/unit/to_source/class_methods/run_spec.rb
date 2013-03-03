@@ -182,12 +182,15 @@ describe ToSource,'.to_source' do
     end
   end
 
-  context 'conditional element assignment' do
-    assert_source 'foo[key] ||= bar'
-  end
 
-  context 'attribute assignment on merge' do
-    assert_source 'self.foo |= bar'
+  %w(|= ||= &= &&= += -= *= /= **= %=).each do |op|
+    context "conditional attribute #{op} assignment" do
+      assert_source "self.foo #{op} bar"
+    end
+
+    context "conditional element #{op} assignment" do
+      assert_source "foo[key] #{op} bar"
+    end
   end
 
 

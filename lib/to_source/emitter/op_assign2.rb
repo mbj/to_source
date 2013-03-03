@@ -18,8 +18,24 @@ module ToSource
         visit(util.receiver)
         emit('.')
         emit(util.name)
-        emit(' |= ')
+        emit(" #{operator} ")
         visit(util.value)
+      end
+
+      MAPPING = {
+        :or =>  :'||',
+        :and => :'&&'
+      }.freeze
+
+      # Return operator
+      #
+      # @return [String]
+      #
+      # @api private
+      #
+      def operator
+        op = node.op
+        "#{MAPPING.fetch(op, op)}="
       end
 
     end
