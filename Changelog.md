@@ -1,6 +1,7 @@
 # v0.2.19 2013-03-1
 
 * [change] Bump dependencies
+* [fixed] Fix op assign 2 operators (self.foo ||= bar, etc)
 
 [Compare v0.2.18..v0.2.19](https://github.com/mbj/to_source/compare/v0.2.18...v0.2.19)
 
