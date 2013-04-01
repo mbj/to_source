@@ -3,6 +3,24 @@ require 'melbourne'
 require 'adamantium'
 require 'abstract_type'
 require 'equalizer'
+
+# Library namespace
+module ToSource
+
+  # Convert node to string
+  #
+  # @param [Rubinius::AST::Node] node
+  #
+  # @return [String]
+  #
+  # @api private
+  #
+  def self.to_source(node)
+    Emitter.run(node)
+  end
+
+end
+
 require 'to_source/command'
 require 'to_source/state'
 require 'to_source/emitter'
@@ -79,20 +97,3 @@ require 'to_source/emitter/yield'
 require 'to_source/emitter/alias'
 require 'to_source/emitter/begin'
 require 'to_source/emitter/util'
-
-# Library namespace
-module ToSource
-
-  # Convert node to string
-  #
-  # @param [Rubinius::AST::Node] node
-  #
-  # @return [String]
-  #
-  # @api private
-  #
-  def self.to_source(node)
-    Emitter.run(node)
-  end
-
-end
