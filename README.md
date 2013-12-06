@@ -1,3 +1,8 @@
+# Warning: 
+
+This gem is defacto unmaintained. It was superseeded by [unparser](https://github.com/unparser).
+
+
 to_source
 =========
 
